@@ -1,0 +1,48 @@
+class Pessoa:
+    def __init__(self, nome, lista):
+        self.nome = nome
+        self.lista = lista
+
+    def contar_fogueiras(self):
+        N = len(self.lista)
+        posicao = 0
+        contador = 0
+
+        if self.lista[posicao] == 0 and N == 1:
+            return f"{self.nome} conseguiu!\n{self.nome} precisou pular {contador} fogueiras"
+        elif self.lista[posicao] == 0:
+            return f"Ah, que pena, {self.nome} não conseguiu!"
+
+        while posicao < N - 1:  
+            pulos = self.lista[posicao]
+
+            if pulos == 0:
+                return f"Ah, que pena, {self.nome} não conseguiu!"
+
+            contador += 1
+            posicao += pulos
+
+            if posicao >= N:
+                break
+
+            pulos = self.lista[posicao]
+
+        return f"{self.nome} conseguiu!\n{self.nome} precisou pular {contador} fogueiras"
+
+
+def pula_fogueira():
+    amigos = []
+
+    for _ in range(4):
+        N = int(input())
+        nome, *tam_lista = input().split()
+        tam_lista = list(map(int, tam_lista))
+        amigo = Pessoa(nome, tam_lista)
+        amigos.append(amigo)
+
+    for amigo in amigos:
+        resultado = amigo.contar_fogueiras()
+        print(resultado)
+
+
+pula_fogueira()
